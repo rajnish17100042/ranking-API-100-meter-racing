@@ -9,10 +9,10 @@ router.get("/", (req, res) => {
   res.send("Hello from the home page");
 });
 
-// add a single palyer in the ranking list
+// adding a single palyer in the ranking list
 router.post("/api/v1/player", async (req, res) => {
   const data = req.body;
-  console.log(data);
+  //   console.log(data);
 
   const { rank, name, dob, country, score } = req.body;
   // server side validation
@@ -31,6 +31,17 @@ router.post("/api/v1/player", async (req, res) => {
     if (playerAdded) {
       res.status(201).json({ result: playerAdded });
     }
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
+
+// getting all the players in increasing order of their rank
+router.get("/api/v1/player", async (req, res) => {
+  try {
+    // get all the players from the database in sorted order
+    const players = await Player.find({}).sort({ rank: 1 });
+    res.status(201).json({ results: players });
   } catch (err) {
     return res.status(500).json({ error: err });
   }
