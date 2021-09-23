@@ -59,5 +59,18 @@ router.get("/api/v1/player/:rank", async (req, res) => {
   }
 });
 
+// updating the rank of a player with the help of id
+router.patch("/api/v1/player/:id", async (req, res) => {
+  const _id = req.params.id;
+  const rank = req.body;
+  try {
+    // update the player with the new Rank
+    const player = await Player.findByIdAndUpdate(_id, rank, { new: true });
+    res.status(201).json({ result: player });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
+
 // export the router
 module.exports = router;
