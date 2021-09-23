@@ -47,5 +47,17 @@ router.get("/api/v1/player", async (req, res) => {
   }
 });
 
+// getting a single player with the help of rank of a player
+router.get("/api/v1/player/:rank", async (req, res) => {
+  const rank = req.params.rank;
+  try {
+    // get all the players from the database in sorted order
+    const player = await Player.find({ rank });
+    res.status(201).json({ result: player });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
+
 // export the router
 module.exports = router;
