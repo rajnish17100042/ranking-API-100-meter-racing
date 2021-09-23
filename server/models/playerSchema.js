@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 // create schema for the collection
 
 const playerSchema = new mongoose.Schema({
-  ranking: {
-    type: number,
+  rank: {
+    type: Number,
     require: true,
     unique: true,
     trim: true,
@@ -24,4 +24,19 @@ const playerSchema = new mongoose.Schema({
     required: true,
     trim: true,
   },
+  score: {
+    type: Number,
+    required: true,
+    trim: true,
+  },
+  event: {
+    type: String,
+    default: "100 meter",
+  },
 });
+
+// creating the collection
+
+const Player = new mongoose.model("Player", playerSchema);
+
+module.exports = Player;
