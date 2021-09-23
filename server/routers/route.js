@@ -66,7 +66,20 @@ router.patch("/api/v1/player/:id", async (req, res) => {
   try {
     // update the player with the new Rank
     const player = await Player.findByIdAndUpdate(_id, rank, { new: true });
-    res.status(201).json({ result: player });
+    res.status(201).json({ rupdated_player: player });
+  } catch (err) {
+    return res.status(500).json({ error: err });
+  }
+});
+
+// deleting a player from the ranking list using id
+router.delete("/api/v1/player/:id", async (req, res) => {
+  const _id = req.params.id;
+  const rank = req.body;
+  try {
+    // update the player with the new Rank
+    const player = await Player.findByIdAndDelete(_id);
+    res.status(201).json({ deleted_player: player });
   } catch (err) {
     return res.status(500).json({ error: err });
   }
