@@ -4,13 +4,16 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app",
+    "dev": "nodemon app"
   },
   "author": "Rajnish Patel",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.7",
+    "nodemon": "^2.0.12",
     "validator": "^13.6.0"
   }
 }
